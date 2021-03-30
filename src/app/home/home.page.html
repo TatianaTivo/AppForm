@@ -1,20 +1,107 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header>
+  <ion-toolbar color ="danger">
+    <ion-title >
+      <ion-icon name="person-add"></ion-icon>
+      Cadastrar
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <form #meuForm = "ngForm">
+  <ion-item>
+    <ion-label position="stacked">Nome completo</ion-label>
+    <ion-input type = "text" [(ngModel)]="Cadastrar.nome" name= "nome" #nome="ngModel" required></ion-input>
+  </ion-item>
+
+  <ion-item  *ngIf = "nome.invalid && (nome.dirty || nome.touched)" color = "danger">
+
+    <div *ngIf = "nome?.errors.required">
+      Este Campo é Obrigatório.
+    </div >
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">E-mail</ion-label>
+    <ion-input type= "email" [(ngModel)]="Cadastrar.email" name= "email" #email="ngModel" required></ion-input>
+  </ion-item>
+
+  <ion-item  *ngIf = "email.invalid && (email.dirty || email.touched)" color = "danger">
+
+    <div *ngIf = "email?.errors.required">
+      Este Campo é Obrigatório.
+    </div >
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Senha</ion-label>
+    <ion-input type= "password" [(ngModel)]="Cadastrar.senha" name= "senha" #senha="ngModel" required minlength = "8"></ion-input>
+  </ion-item>
+
+  <ion-item  *ngIf = "senha.invalid && (senha.dirty || senha.touched)" color = "danger">
+
+    <div *ngIf = "senha?.errors.required">
+      Este Campo é Obrigatório.
+    </div >
+
+    <div  *ngIf = "senha?.errors.minlength">
+      Senha precisa ter no mínimo 8 caracteres.
+      </div >
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Tipo</ion-label>
+    <ion-select  [(ngModel)]="Cadastrar.tipo" name = "tipo" #tipo="ngModel" required>
+          <ion-select-option  value = "" > Selecione </ion-select-option >
+          <ion-select-option value = "Agente de Saude" > Agente de Saude </ion-select-option >
+          <ion-select-option value = "Paciente" > Paciente </ion-select-option >
+          </ion-select>
+    </ion-item>
+
+    <ion-item  *ngIf = "tipo.invalid && (tipo.dirty || tipo.touched)" color = "danger">
+
+      <div *ngIf = "tipo?.errors.required">
+        Este Campo é Obrigatório.
+      </div >
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select  [(ngModel)]="Cadastrar.genero" name = "sexo" #sexo="ngModel" required>
+            <ion-select-option  value = "" > Selecione </ion-select-option >
+            <ion-select-option value = "Feminino" > Feminino </ion-select-option >
+            <ion-select-option value = "Masculino" > Masculino </ion-select-option >
+            </ion-select>
+      </ion-item>
+
+      <ion-item  *ngIf = "sexo.invalid && (sexo.dirty || sexo.touched)" color = "danger">
+
+        <div *ngIf = "sexo?.errors.required">
+          Este Campo é Obrigatório.
+        </div >
+
+      </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data de nascimento</ion-label>
+      <ion-input type="date" [(ngModel)]="Cadastrar.datenacimento" name="data" #data="ngModel" required ></ion-input>
+    </ion-item>
+
+    <ion-item  *ngIf = "data.invalid && (data.dirty || data.touched)" color = "danger">
+
+      <div *ngIf = "data?.errors.required">
+        Este Campo é Obrigatório.
+      </div >
+
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea name="observacoes" placeholder="Observações:" [(ngModel)]="Cadastrar.observacoes"></ion-textarea>
+    </ion-item>
+
+    <ion-button [disabled] = "!meuForm.form.valid" (click) = " salvar () " > Salvar</ion-button>
+</form>
 </ion-content>

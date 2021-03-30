@@ -1,4 +1,6 @@
+import { cadastrar } from './shared/cadastrar';
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  Cadastrar: cadastrar
 
-  constructor() {}
+  constructor(public  navCtrl : NavController) {
+    this.Cadastrar = new cadastrar();
+  }
 
+  ngOnInit() {
+
+
+   }
+   salvar(){
+     console.log(this.Cadastrar)
+
+     this.Cadastrar = new cadastrar();
+   };
 }
